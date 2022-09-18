@@ -1,0 +1,27 @@
+/* ::ng-deep .modal-content {
+  background-color: red !important;
+}
+*/
+ .kl-modal-title{
+  color:#fff;
+  background-color: red ;
+}
+.modal-body{
+  color:black
+}
+.kl-blue-modal{
+  background-color: blue ;
+  color:#fff;
+}
+
+.noDisplay {
+  display: none;
+  visibility: hidden;
+}
+
+button {
+  position: absolute;
+  margin-top: 25px;
+  right: 200px !important;
+}
+

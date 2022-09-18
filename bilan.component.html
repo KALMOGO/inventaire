@@ -1,0 +1,138 @@
+
+ <div class="container-fluid">
+  <nav class="navbar fixed-top" style="background-color:blue ;">
+    <div class="container-fluid">
+      <a class="navbar-brand " href="#">Inventaire</a>
+    </div>
+  </nav>
+
+  <div class="container" id="tableToPrint" style="margin-top:90px">
+    <h3 class="mb-3 text-center">
+      Inventaire du {{today | date :'dd/mm/YYYY'}}
+
+     </h3>
+
+    <table class="table  border border-1 table-striped" >
+
+      <thead >
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Désignation</th>
+          <th scope="col">Categorie</th>
+          <th scope="col">Quantite</th>
+          <th scope="col">Prix Unitaire</th>
+          <th scope="col">Prix total</th>
+          <th scope="col" ngClass="noDisplay:isPrinting"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of listeBilan;let i=index">
+          <th scope="row">{{i+1}}</th>
+          <td>{{data.designation}}</td>
+          <td>{{data.list_categorie.designation}}</td>
+          <td>{{data.quantite}}</td>
+          <td>{{data.prix_unitaire}}</td>
+          <td>{{data.montant}}</td>
+          <td ngClass="noDisplay:isPrinting">
+            <span style="color: green; cursor:pointer"
+                (click)="openEdtConfirmModal(editer, data)"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">
+               <i-bs  name="dash"></i-bs>
+            </span>
+
+            <span style="color: red; cursor:pointer" (click)="opendleConfirmModal(delete, data.id)"
+            data-bs-toggle="modal" data-bs-target="#exampleModal"> <i-bs  name="x"></i-bs> </span>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+    <!-- Bootstrap 5 Pagination -->
+    <button ngxPrint (click)="changeValues()" printSectionId="tableToPrint"  [useExistingCss]="true" class="btn btn-primary mx-auto">Imprimer</button>
+
+</div>
+
+
+<div class="kl-i">
+  <ng-template #delete let-modal>
+
+    <div class="modal-header kl-modal-title">
+      <h4 class="modal-title " id="modal-basic-title"> Suppression</h4>
+    </div>
+
+    <div class="modal-body kl-modal-title">
+      <h3> Cette Action est irreversible! </h3>
+    </div>
+    <div class="modal-footer kl-modal-title">
+      <button type="button" class="btn btn-danger"
+       (click)="modal.close('Save click')">valider</button>
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Vertically centered scrollable modal
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  ...
+</div> -->
+
+<ng-template #editer let-modal>
+
+  <div class="modal-header kl-blue-modal">
+    <h4 class="modal-title" id="modal-basic-title"> Edition</h4>
+  </div>
+
+  <div class="modal-body kl-blue-modal">
+    <form [formGroup]="formAjoutPiece">
+      <div class="mb-3">
+        <label for="piece" class="form-label h5">Piece:</label>
+        <select class="form-select" formControlName="designation" id="piece">
+          <option >-----</option>
+          <option [selected]="item.id == selected.piece_id"
+           *ngFor="let item of listes_pieces"
+           [value]="item.designation">{{item.designation}}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="categorie" class="form-label h5">Categorie:</label>
+        <select class="form-select" id="categorie"
+           formControlName="categorie" name="categorie">
+          <option >-----</option>
+          <option *ngFor="let data of liste_categories"
+           [value]="data.id" >{{data.designation}}</option>
+
+        </select>
+      </div>
+
+      <div class="md-3">
+        <label for="quantite" class="form-label h5">Quantite</label>
+        <input type="number" id="cout"
+          formControlName="quantite" (ngModelChange)="setQuantite()"
+         class="form-control" name="quantite">
+      </div>
+
+      <div class="mt-5">
+        <label for="cout" class="form-label h5">
+           Cout Unitaire:
+           <small class="lead" style="color:#fff"> total$ {{quantite * cout}}  </small>
+        </label>
+        <input type="number" id="cout" (ngModelChange)="setCout()"
+          formControlName="cout_unitaire" class="form-control" name="cout">
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer kl-blue-modal">
+    <button type="button" class="btn btn-danger"
+     (click)="modal.close('Save click')">annuler</button>
+
+     <button type="button" class="btn btn-primary"
+    (click)="performUpdate(selected.piece_id)">valider</button>
+  </div>
+</ng-template>
