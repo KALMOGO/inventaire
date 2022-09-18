@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+
+  <div class="row" style="margin-top:10px">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header text-center display-7">
+          Enregistrement
+        </div>
+        <div class="card-body">
+          <form [formGroup]="formAjoutPiece">
+            <div class="mb-3">
+              <label for="piece" class="form-label h5">Piece:</label>
+              <select class="form-select" formControlName="designation" id="piece">
+                <option selected>-----</option>
+                <option *ngFor="let item of listes_pieces" [value]="item.designation">{{item.designation}}</option>
+
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="categorie" class="form-label h5">Categorie:</label>
+              <select class="form-select" id="categorie" formControlName="categorie" name="categorie">
+                <option  selected>-----</option>
+                <option *ngFor="let data of liste_categories"
+                 [value]="data.id">{{data.designation}}</option>
+
+              </select>
+            </div>
+
+            <div class="md-3">
+              <label for="quantite" class="form-label h5">Quantite</label>
+              <input type="number" id="cout"
+               [(ngModel)]="quantite" formControlName="quantite"
+               class="form-control" name="quantite">
+            </div>
+
+            <div class="mt-5">
+              <label for="cout" class="form-label h5">
+                 Cout Unitaire:
+                 <small class="lead text-muted"> total {{quantite * cout}}  </small>
+              </label>
+              <input type="number" id="cout" [(ngModel)]="cout"
+                formControlName="cout_unitaire" class="form-control" name="cout">
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-muted text-end">
+          <a class="btn btn-info me-2" (click)="formAjoutPiece.reset()">Annuler</a>
+          <!-- <a  class="btn btn-primary"   id="liveToastBtn" (click)="enregistrementPieces()">Ajouter</a> -->
+          <button class="btn btn-primary"
+           [disabled]="!formAjoutPiece.valid"
+            (click)="enregistrementPieces()">Ajouter</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+
+      <div class="row">
+        <div class="col">
+          <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">TOTAL</h5>
+              <p class="card-text">
+                {{nombrePiece}} piece(s)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Montant</h5>
+              <p class="card-text">
+                {{montant}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center">
+       <a href="bilan"> Voir liste</a>
+      </div>
+
+
+      <div id="liveToast" class=" toast align-items-center text-bg-primary border-0"
+          role="alert" aria-live="assertive" aria-atomic="true">
+
+        <div class="d-flex">
+
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
