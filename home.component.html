@@ -1,0 +1,38 @@
+<section class="vh-100">
+
+  <div class="container-fluid h-custom">
+    <div class="title">
+      <h2>Connexion</h2>
+    </div>
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="../../assets/images/piece.jpg"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-lg-6 col-xl-4 offset-xl-1">
+        <form [formGroup]="userLoginForm" (ngSubmit)="onLoginAction(userLoginForm.value)">
+
+          <!-- Email input -->
+          <div class="form-outline mb-5">
+            <input type="email" id="form3Example3" formControlName="username" class="form-control form-control-lg"
+              placeholder="Utilisateur" />
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input type="password" formControlName="password" id="form3Example4" class="form-control form-control-lg"
+              placeholder="Mot de passe" />
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit"  class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Se connecter</button>
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+</section>

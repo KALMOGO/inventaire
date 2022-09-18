@@ -1,0 +1,30 @@
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: 400px;
+  box-shadow: 3px 3px 3px 3px #005b8f ;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-left: 150px;
+  margin-bottom: 50px;
+  width: 70%;
+}
+
+.title {
+  background-color: blue ;
+  height: 70px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}
